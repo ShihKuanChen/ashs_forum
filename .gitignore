@@ -1,0 +1,55 @@
+# Editor directories and files
+.vscode
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# environment values
+.env
+.env.development
+.env.production
+
+# --- frontend ---
+# Logs
+ashs_forum_front/logs
+ashs_forum_front/*.log
+ashs_forum_front/npm-debug.log*
+ashs_forum_front/yarn-debug.log*
+ashs_forum_front/yarn-error.log*
+ashs_forum_front/pnpm-debug.log*
+ashs_forum_front/lerna-debug.log*
+
+ashs_forum_front/node_modules
+ashs_forum_front/.DS_Store
+ashs_forum_front/dist
+ashs_forum_front/dist-ssr
+ashs_forum_front/coverage
+ashs_forum_front/*.local
+
+
+
+ashs_forum_front/*.tsbuildinfo
+
+ashs_forum_front/.eslintcache
+
+# Cypress
+ashs_forum_front/cypress/videos/
+ashs_forum_front/cypress/screenshots/
+
+# Vitest
+ashs_forum_front/__screenshots__/
+
+ashs_forum_front/oauth_client
+
+
+# --- backend ---
+# python envirnoment
+ashs_forum_back/ashs_forum_back_env
+
+# sqlite database
+ashs_forum_back/instance

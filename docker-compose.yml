@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./ashs_forum_back
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./ashs_forum_back:/app
+    env_file:
+      - ./.env
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+    
+  frontend:
+    build: ./ashs_forum_front
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./.env
+    volumes:
+      - ./ashs_forum_front:/app
+      - /app/node_modules
