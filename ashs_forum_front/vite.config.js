@@ -16,6 +16,13 @@ export default defineConfig({
     },
   },
   server: {
+    watch: {
+      usePolling: true,
+    },
+    hmr: {
+      clientPort: 5173,
+    },
+    host: '0.0.0.0',
     headers: {
       'Referrer-Policy': 'no-referrer-when-downgrade',
       'Cross-Origin-Opener-Policy': 'same-origin-allow-popups'

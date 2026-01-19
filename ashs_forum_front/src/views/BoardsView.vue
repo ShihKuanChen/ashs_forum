@@ -8,7 +8,7 @@
   const boards = ref([]);
 
   onMounted(async () => {
-    const newBoards = await axios.get('/api/boards');
+    const newBoards = await axios.get('/api/board/boards_info');
     // console.log(boards.data);
     boards.value = newBoards.data;
   });

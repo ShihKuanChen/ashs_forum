@@ -7,7 +7,7 @@ export const useLoginStore = defineStore('login', () => {
 
     async function checkLogin() {
         try { 
-            const response = await axios.get('/api/is_logged_in');
+            const response = await axios.get('/api/auth/is_logged_in');
             isLogin.value = response.data['is_logged_in'];
 
             // .then(response => {

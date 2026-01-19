@@ -36,7 +36,17 @@
 
   * {
     font-family: "Chiron Hei HK", sans-serif;
+    
+  }
+
+  button, input {
+    background: rgb(37, 37, 37);
     color: rgb(236, 236, 236);
+    border: 0;
+    margin-right: 1rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.5rem;
   }
 
   .btnDisabled {

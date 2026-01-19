@@ -15,7 +15,7 @@
 
   onMounted(async () => {
     // get board chinese title
-    const newBoardTitle = await axios.get(`/api/board_zh`, {
+    const newBoardTitle = await axios.get(`/api/board/board_zh`, {
       params: {
         board: board
       }
@@ -34,7 +34,7 @@
       console.log(`loading`);
       // pause();
       // get article titles and upload time
-      await axios.get(`/api`, {
+      await axios.get(`/api/article/articles_info`, {
         params: {
           limit: 30, 
           board: board, 

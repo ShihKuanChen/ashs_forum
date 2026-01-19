@@ -7,6 +7,7 @@ import ArticleView from '@/views/ArticleView.vue'
 import BoardsView from '@/views/BoardsView.vue'
 import axios from 'axios'
 import WriteView from '@/views/WriteView.vue'
+import ManagerView from '@/views/ManagerView.vue'
 import { useLoginStore } from '../../stores/LoginStore'
 
 
@@ -32,7 +33,7 @@ const router = createRouter({
       const loginStore = useLoginStore();
       const { checkLogin } = loginStore;
 
-      axios.post('/api/logout');
+      axios.post('/api/auth/logout');
       
       checkLogin();
     },
@@ -53,7 +54,11 @@ const router = createRouter({
     path: '/write',
     name: 'write',
     component: WriteView
-  }, , { 
+  }, {
+    path: '/manage',
+    name: 'manage',
+    component: ManagerView
+  }, { 
     path: '/:pathMatch(.*)*', 
     redirect: '/' 
   }],

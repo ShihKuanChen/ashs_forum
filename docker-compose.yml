@@ -10,6 +10,9 @@ services:
     environment:
       - PYTHONDONTWRITEBYTECODE=1
       - PYTHONUNBUFFERED=1
+    depends_on:
+      - redis
+      - db
     
   frontend:
     build: ./ashs_forum_front
@@ -20,3 +23,36 @@ services:
     volumes:
       - ./ashs_forum_front:/app
       - /app/node_modules
+  
+  redis:
+    image: redis:8
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ashs_forum_redis_data:/data
+    
+  redis-insight:
+    image: redis/redisinsight:latest
+    ports:
+      - "5540:5540"
+    volumes:
+      - ashs_forum_redisinsight_data:/data
+    depends_on:
+      - redis
+
+  db:
+    image: postgres:18
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      ./.env
+    volumes:
+      - ashs_forum_db_data:/var/lib/postgresql
+
+
+volumes:
+  ashs_forum_redis_data:
+  ashs_forum_redisinsight_data:
+  ashs_forum_db_data:

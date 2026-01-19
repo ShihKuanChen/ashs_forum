@@ -12,7 +12,7 @@
     console.log(response);
 
     // call login api
-    await axios.post('/api/login', {
+    await axios.post('/api/auth/login', {
       token: response['credential']
     }).then(response => {
       router.replace('/');

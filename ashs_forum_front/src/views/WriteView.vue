@@ -30,7 +30,7 @@
   const submitArticle = async () => {
     if (!isTitleOrContentEmpty.value) {
       console.log(`is pinned: ${pinned.value}`);
-      axios.post('/api/write', {
+      axios.post('/api/article/write', {
         article_board: selectedBoard.value,
         article_title: articleTitle.value,
         article_content: articleContent.value,
@@ -56,10 +56,10 @@
       router.replace('/login');
     }
 
-    const newBoards = await axios.get('/api/boards');
+    const newBoards = await axios.get('/api/board/boards_info');
     boards.value = newBoards.data;
 
-    const manager_status = await axios.get('/api/is_manager');
+    const manager_status = await axios.get('/api/auth/is_manager');
     isManger.value = manager_status.data['is_manager']
     console.log(manager_status.data);
   });

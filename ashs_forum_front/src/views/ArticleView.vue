@@ -34,7 +34,7 @@
 
   const comments = ref([]);
   const getComments = async () => {
-    axios.get(`/api/comments/${article_id}`)
+    axios.get(`/api/comment/comments/${article_id}`)
     .then(response => {
       comments.value = response.data;
       console.log(response.data);
@@ -55,7 +55,7 @@
   const comment = ref('');
   const submitComment = async () => {
     if (!isBtnDisabled.value) {
-      axios.post('/api/write_comment', {
+      axios.post('/api/comment/write', {
         article_id: article_id,
         comment_content: comment.value
       })

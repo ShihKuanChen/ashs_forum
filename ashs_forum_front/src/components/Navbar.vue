@@ -12,7 +12,7 @@
   const { checkLogin } = loginStore;
 
   async function logout() {
-    await axios.post('/api/logout');
+    await axios.post('/api/auth/logout');
     await checkLogin();
     
     router.replace('/');
