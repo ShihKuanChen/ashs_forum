@@ -3,13 +3,14 @@ from datetime import datetime
 from flask import request, jsonify, session, Blueprint
 from sqlalchemy import select
 from .models import Comment
+from blueprints.auth.utils import check_if_is_logged_in
 
 comment_bp = Blueprint('comment', __name__)
 
 
 @comment_bp.route("/write", methods=['POST'])
 def create_comment():
-    if not session.get('logged_in'):
+    if not check_if_is_logged_in():
         return jsonify({"error": "Unauthorized"}), 401
     
     current_time = datetime.now()

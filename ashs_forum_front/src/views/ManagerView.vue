@@ -56,14 +56,23 @@
   }
 
   const removeArticleAndComments = async () => {
-
+    try {
+      await axios.post('/api/manage/remove_article_and_comments', {
+        article_id: inputValues.value.article_id
+      });
+      alert('刪除成功');
+      inputValues.value.article_id = '';
+    } catch (error) {
+      console.log(error);
+      alert(`刪除失敗`)
+    }
   }
 
   const banUser = async () => {
 
   }
 
-  const debanUser = async () => {
+  const unbanUser = async () => {
 
   }
 
@@ -85,7 +94,7 @@
   </div>
   <label>刪除文章及留言區</label>
   <div class="inputArea">
-    <input type="text" placeholder="請輸入文章id"/>
+    <input v-model="inputValues.article_id" type="text" placeholder="請輸入文章id"/>
     <button @click="removeArticleAndComments()">刪除</button>
   </div>
   <label>封鎖用戶</label>
@@ -96,7 +105,7 @@
   <label>解除封鎖</label>
   <div class="inputArea">
     <input type="text" placeholder="請輸入用戶id"/>
-    <button @click="debanUser()">解除</button>
+    <button @click="unbanUser()">解除</button>
   </div>
 </template>
 

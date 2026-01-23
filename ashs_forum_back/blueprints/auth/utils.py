@@ -15,3 +15,9 @@ def check_if_is_manager():
         return user.is_manager
     
     return False
+
+def check_if_is_logged_in():
+    if session.get('user_id'):
+        return True
+    
+    return False

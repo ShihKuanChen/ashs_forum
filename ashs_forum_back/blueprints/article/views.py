@@ -3,8 +3,9 @@ from sqlalchemy import select
 from database import db
 from .models import Article
 from datetime import datetime
-from blueprints.auth.utils import check_if_is_manager
+from blueprints.auth.utils import check_if_is_manager, check_if_is_logged_in
 from blueprints.board.server import update_board
+from blueprints.utils import get_tw_zone
 
 article_bp = Blueprint('article', __name__)
 
@@ -27,9 +28,10 @@ def get_articles_info():
         pinned_articles = db.session.execute(pinned_stmt).scalars().all()
 
         for article in pinned_articles:
+            upload_time = article.article_upload_time.astimezone(get_tw_zone()).strftime("%Y-%m-%d %H:%M")
             result.append({
                 "article_title": article.article_title,
-                "article_upload_time": article.article_upload_time,
+                "article_upload_time": upload_time,
                 "article_id": article.article_id
             })
 
@@ -49,9 +51,10 @@ def get_articles_info():
     articles = db.session.execute(stmt).scalars().all()
     
     for article in articles:
+        upload_time = article.article_upload_time.astimezone(get_tw_zone()).strftime("%Y-%m-%d %H:%M")
         result.append({
             "article_title": article.article_title,
-            "article_upload_time": article.article_upload_time,
+            "article_upload_time": upload_time,
             "article_id": article.article_id
         })
     
@@ -64,16 +67,18 @@ def get_article(article_id: int):
     if article is None:
         return jsonify({"error": "Can't find the article."}), 404
     
+    upload_time = article.article_upload_time.astimezone(get_tw_zone()).strftime("%Y-%m-%d %H:%M")
+    
     return jsonify({
         "article_id": article.article_id,
         "article_title": article.article_title,
         "article_content": article.article_content,
-        "article_upload_time": article.article_upload_time
+        "article_upload_time": upload_time
     })
 
 @article_bp.route("/write", methods=['POST'])
 def create_article():
-    if not session.get('logged_in'):
+    if not check_if_is_logged_in():
         return jsonify({"error": "Unauthorized"}), 401
     
     current_time = datetime.now()
@@ -95,13 +100,16 @@ def create_article():
         article_board=article_board,
         article_content=article_content,
         article_title=article_title,
-        article_upload_time=current_time.strftime("%Y-%m-%d %H:%M"),
+        article_upload_time=current_time,
         writer_id=writer_id,
         pinned=pinned
     )
 
     db.session.add(new_article)
-    update_board(article_board, current_time.strftime("%Y-%m-%d"))
+    update_board(article_board, commit=True)
+    print("update board")
+
+    return jsonify({"message": "Article created successfully"}), 201
 
     # board_data = db.session.execute(
     #     select(Board).where(Board.board_eng == article_board)
@@ -110,11 +118,3 @@ def create_article():
     # board_data.board_n_articles += 1
     # board_data.board_last_time = current_time.strftime("%Y-%m-%d")
     
-    try:
-        db.session.commit()
-
-        return jsonify({"message": "Article created successfully"}), 201
-    
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({"error": str(e)}), 500

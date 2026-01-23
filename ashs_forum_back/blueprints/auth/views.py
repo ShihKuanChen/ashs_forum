@@ -7,7 +7,7 @@ from typing import Mapping, Any
 from database import db
 from flask import Blueprint
 from .models import User
-from .utils import check_if_is_manager
+from .utils import check_if_is_manager, check_if_is_logged_in
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -55,7 +55,7 @@ def login():
 
 @auth_bp.route("/is_logged_in", methods=['GET'])
 def is_logged_in():
-    if session.get('user_id'):
+    if check_if_is_logged_in():
         return jsonify({'is_logged_in': True}), 200
     
     return jsonify({'is_logged_in': False}), 200
