@@ -94,7 +94,7 @@
       await axios.post('/api/manage/remove_article_and_comments', {
         article_id: article_id
       });
-      hasMore.value = false;
+      hasMore.value = true;
       articles.value = [];
       lastArticleId.value = -1;
       alert('刪除成功');
@@ -110,6 +110,7 @@
 
 <template>
   <h1 class="board-title">{{ board_zh }}</h1>
+  <!-- <router-link class="write-link" :to="{path: '/write', query: {board: board}}">我要投稿</router-link> -->
   <div ref="scrollContainer" class="scrollContainer">
     <div v-for="article in articles" id="articles" :key="article.article_id" @click="routeToArticle(article.article_id)">
       <article :id=article.article_id>

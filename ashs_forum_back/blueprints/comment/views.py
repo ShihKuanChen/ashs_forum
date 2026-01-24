@@ -1,9 +1,10 @@
 from database import db
-from datetime import datetime
+from datetime import datetime, timezone
 from flask import request, jsonify, session, Blueprint
 from sqlalchemy import select
 from .models import Comment
 from blueprints.auth.utils import check_if_is_logged_in
+from blueprints.utils import get_tw_zone
 
 comment_bp = Blueprint('comment', __name__)
 
@@ -13,7 +14,7 @@ def create_comment():
     if not check_if_is_logged_in():
         return jsonify({"error": "Unauthorized"}), 401
     
-    current_time = datetime.now()
+    current_time = datetime.now(timezone.utc)
     
     request_data: dict[str, str] = request.get_json()
 
@@ -28,7 +29,7 @@ def create_comment():
         article_id=article_id,
         comment_content=comment_content,
         writer_id=writer_id,
-        comment_upload_time=current_time.strftime("%Y-%m-%d %H:%M")
+        comment_upload_time=current_time
     )
 
     db.session.add(new_comment)
@@ -60,7 +61,7 @@ def get_comments(article_id: int):
         result.append({
             "comment_id": comment.comment_id,
             "comment_content": comment.comment_content,
-            "comment_upload_time": comment.comment_upload_time,
+            "comment_upload_time": comment.comment_upload_time.astimezone(get_tw_zone()).strftime("%Y-%m-%d %H:%M"),
         })
 
     return jsonify(result)

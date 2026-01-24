@@ -1,5 +1,5 @@
 <script setup>
-  import {useRouter} from 'vue-router';
+  import { useRouter, useRoute } from 'vue-router';
   import axios from 'axios';
   import { useLoginStore } from '../../stores/LoginStore';
   import { ref, onMounted, computed } from 'vue';
@@ -12,13 +12,14 @@
   const { checkLogin } = loginStore;
 
   const router = useRouter();
+  const route = useRoute();
 
   const boards = ref([]);
 
   // article
   const articleTitle = ref('');
   const articleContent = ref('');
-  const selectedBoard = ref('chat');
+  const selectedBoard = ref(route.query.board || 'chat');
   const pinned = ref(false);
   // const btnEnabled = ref(false);
 

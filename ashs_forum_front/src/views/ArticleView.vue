@@ -1,7 +1,9 @@
 <script setup>
   import axios from 'axios';
   import { useRoute, useRouter } from 'vue-router';
-  import { computed, ref } from 'vue';
+  import { computed, ref, onMounted } from 'vue';
+  import { useLoginStore } from '../../stores/LoginStore';
+  import { storeToRefs } from 'pinia';
   
   // get title, content here
 
@@ -12,6 +14,10 @@
   // var article_title;
   // var article_content;
   // var article_upload_time;
+
+  const loginStore = useLoginStore();
+  const { isLogin } = storeToRefs(loginStore);
+  const { checkLogin } = loginStore;
 
 
   // get article 
@@ -46,9 +52,13 @@
 
   getComments();
 
+  onMounted(async () => {
+    await checkLogin();
+  });
+
   const isBtnDisabled = computed(() => {
-    console.log(comment.value.trim() === '');
-    return comment.value.trim() === '';
+    console.log(comment.value.trim() === '' || !isLogin.value);
+    return (comment.value.trim() === '' || !isLogin.value);
   })
 
   // user comment
@@ -104,11 +114,15 @@
     border-top: 1px solid rgb(87, 87, 87);
   }
 
+  .commentsContainer p {
+    font-size: 0.9rem;
+  }
+
   .commentsContainer {
     grid-template-columns: auto auto;
     display: grid;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
     border-bottom: 1px solid rgb(87, 87, 87);
   }
 

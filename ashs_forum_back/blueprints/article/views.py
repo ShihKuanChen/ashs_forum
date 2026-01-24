@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, session
 from sqlalchemy import select
 from database import db
 from .models import Article
-from datetime import datetime
+from datetime import datetime, timezone
 from blueprints.auth.utils import check_if_is_manager, check_if_is_logged_in
 from blueprints.board.server import update_board
 from blueprints.utils import get_tw_zone
@@ -81,7 +81,7 @@ def create_article():
     if not check_if_is_logged_in():
         return jsonify({"error": "Unauthorized"}), 401
     
-    current_time = datetime.now()
+    current_time = datetime.now(timezone.utc)
     
     request_data = request.get_json()
 
