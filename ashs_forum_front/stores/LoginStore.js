@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import axios from "axios";
 
+
 export const useUserInfoStore = defineStore('userInfo', () => {
     const isLogin = ref(false);
     const isBanned = ref(false);
@@ -26,4 +27,4 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     }
     
     return {isLogin, isBanned, isManager, updateUserInfo}; 
-});
+}, {persist: true});

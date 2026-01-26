@@ -17,6 +17,9 @@ def login():
     request_data: dict[str, str] = request.get_json()
     token = request_data.get('token')
 
+    if check_if_is_logged_in():
+        return api_response(success=False, message="Already login", code=400)
+
     try:
         # get id info
         id_info: Mapping[str, Any] = id_token.verify_oauth2_token( # type: ignore

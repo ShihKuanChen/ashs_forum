@@ -9,7 +9,6 @@
   // get login status
   const userInfoStore = useUserInfoStore();
   const { isLogin, isManager } = storeToRefs(userInfoStore);
-  const { updateUserInfo } = userInfoStore;
 
   const router = useRouter();
   const route = useRoute();
@@ -19,7 +18,7 @@
   // article
   const articleTitle = ref('');
   const articleContent = ref('');
-  const selectedBoard = ref(route.query.board || 'chat');
+  const selectedBoard = ref(route.query.board || '');
   const pinned = ref(false);
   // const btnEnabled = ref(false);
 
@@ -55,6 +54,7 @@
 
     const newBoards = await axios.get('/api/board/boards_info');
     boards.value = newBoards.data;
+    selectedBoard.value = boards.value[0].board_eng;
   });
 
 </script>
