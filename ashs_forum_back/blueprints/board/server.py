@@ -59,10 +59,13 @@ def create_board(board_eng: str, board_zh: str, commit: bool=False):
 
 
 def remove_board(board_eng: str, commit: bool=False):
-    db.session.execute(
+    result = db.session.execute(
         delete(Board)
         .where(Board.board_eng == board_eng)
     )
+
+    if result.rowcount == 0: # type: ignore
+        raise Exception("Can't find the board")
 
     if not commit: return
 

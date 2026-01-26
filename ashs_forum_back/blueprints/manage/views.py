@@ -1,7 +1,7 @@
 from flask import Blueprint
 from blueprints.auth.utils import check_if_is_manager
 from blueprints.board.server import create_board, remove_board, update_board
-from blueprints.article.server import remove_article_by_id, get_article_board_eng_by_id
+from blueprints.article.server import remove_article_by_id, get_article_board_eng_by_id, remove_article_by_board
 from blueprints.comment.server import remove_comments_by_article_id, remove_comments_by_board
 from flask import jsonify, request
 from database import db
@@ -48,6 +48,7 @@ def remove_board_route():
         return jsonify({"error": "Board name cannot be empty"}), 400
     
     try:
+        remove_article_by_board(board_eng, commit=False)
         remove_comments_by_board(board_eng, commit=False)
         remove_board(board_eng, commit=False)
         db.session.commit()
