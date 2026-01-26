@@ -10,7 +10,7 @@ def check_if_is_manager():
 
     
     user = db.session.execute(select(User).where(User.user_id == user_id)).scalar()
-    print(f"user: {user}")
+    # print(f"user: {user}")
     if user is not None:
         return user.is_manager
     
@@ -23,5 +23,12 @@ def check_if_is_logged_in():
     return False
 
 def check_if_is_banned():
-    # TODO: done this funcion
-    ...
+    user_id = session.get('user_id')
+    if user_id is None:
+        return True
+    
+    user = db.session.execute(select(User).where(User.user_id == user_id)).scalar()
+    if user is not None:
+        return user.is_banned
+    
+    return True
