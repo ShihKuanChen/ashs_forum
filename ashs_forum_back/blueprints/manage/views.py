@@ -1,11 +1,12 @@
 from flask import Blueprint
+from blueprints.utils import api_response
 from blueprints.auth.utils import check_if_is_manager
+from blueprints.auth.server import ban_user, unban_user
 from blueprints.board.server import create_board, remove_board, update_board
 from blueprints.article.server import remove_article_by_id, get_article_board_eng_by_id, remove_article_by_board
 from blueprints.comment.server import remove_comments_by_article_id, remove_comments_by_board
 from flask import jsonify, request
 from database import db
-
 
 manage_bp = Blueprint('manage', __name__)
 
@@ -79,3 +80,55 @@ def remove_article_and_comments():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+    
+@manage_bp.route("/ban_user", methods=['POST'])
+def ban_user_route():
+    if not check_if_is_manager():
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    user_id = request.get_json().get('user_id')
+
+    if user_id is None:
+        return api_response(
+            success=False,
+            message="Invalid article id",
+            code=400
+        )
+    try:
+        ban_user(user_id, commit=True)
+        return api_response(
+            message="Ban user success"
+        )
+    
+    except Exception as e:
+        return api_response(
+            success=False,
+            message=str(e),
+            code=400
+        )
+    
+@manage_bp.route("/unban_user", methods=['POST'])
+def unban_user_route():
+    if not check_if_is_manager():
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    user_id = request.get_json().get('user_id')
+
+    if user_id is None:
+        return api_response(
+            success=False,
+            message="Invalid article id",
+            code=400
+        )
+    try:
+        unban_user(user_id, commit=True)
+        return api_response(
+            message="Unban user success"
+        )
+    
+    except Exception as e:
+        return api_response(
+            success=False,
+            message=str(e),
+            code=400
+        )

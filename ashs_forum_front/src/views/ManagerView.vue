@@ -24,7 +24,8 @@
     create_board_zh: '',
     rm_board_eng: '',
     article_id: '',
-    user_id: ''
+    ban_user_id: '',
+    unban_user_id: ''
   });
 
   const createBoard = async () => {
@@ -69,11 +70,29 @@
   }
 
   const banUser = async () => {
-
+    try {
+      await axios.post('/api/manage/ban_user', {
+        user_id: inputValues.value.ban_user_id
+      });
+      alert('封鎖成功');
+      inputValues.value.ban_user_id = '';
+    } catch (error) {
+      console.log(error);
+      alert(`封鎖失敗`)
+    }
   }
 
   const unbanUser = async () => {
-
+    try {
+      await axios.post('/api/manage/unban_user', {
+        user_id: inputValues.value.unban_user_id
+      });
+      alert('解除封鎖成功');
+      inputValues.value.unban_user_id = '';
+    } catch (error) {
+      console.log(error);
+      alert(`解除封鎖失敗`)
+    }
   }
 
 
@@ -99,12 +118,12 @@
   </div>
   <label>封鎖用戶</label>
   <div class="inputArea">
-    <input type="text" placeholder="請輸入用戶id"/>
+    <input v-model="inputValues.ban_user_id"  type="text" placeholder="請輸入用戶id"/>
     <button @click="banUser()">封鎖</button>
   </div>
   <label>解除封鎖</label>
   <div class="inputArea">
-    <input type="text" placeholder="請輸入用戶id"/>
+    <input v-model="inputValues.unban_user_id" type="text" placeholder="請輸入用戶id"/>
     <button @click="unbanUser()">解除</button>
   </div>
 </template>
