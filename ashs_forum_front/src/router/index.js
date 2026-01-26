@@ -8,7 +8,7 @@ import BoardsView from '@/views/BoardsView.vue'
 import axios from 'axios'
 import WriteView from '@/views/WriteView.vue'
 import ManagerView from '@/views/ManagerView.vue'
-import { useLoginStore } from '../../stores/LoginStore'
+import { useUserInfoStore } from '../../stores/LoginStore'
 
 
 const router = createRouter({
@@ -30,12 +30,12 @@ const router = createRouter({
     name: 'logout',
     beforeEnter: (to, from) => {
       console.log('logout');
-      const loginStore = useLoginStore();
-      const { checkLogin } = loginStore;
+      const userInfoStore = useUserInfoStore();
+      const { updateUserInfo } = userInfoStore;
 
       axios.post('/api/auth/logout');
       
-      checkLogin();
+      updateUserInfo();
     },
     redirect: '/'
   }, {

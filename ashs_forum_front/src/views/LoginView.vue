@@ -1,11 +1,11 @@
 <script setup>
   import axios from 'axios';
   import { useRouter } from 'vue-router';
-  import { useLoginStore } from '../../stores/LoginStore';
+  import { useUserInfoStore } from '../../stores/LoginStore';
 
   const router = useRouter();
-  const loginStore = useLoginStore();
-  const { checkLogin } = loginStore;
+  const userInfoStore = useUserInfoStore();
+  const { updateUserInfo } = userInfoStore;
 
 
   const callback = async (response) => {
@@ -21,7 +21,7 @@
     });
 
     // update login status
-    checkLogin();
+    updateUserInfo();
   }
 </script>
 

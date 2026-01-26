@@ -1,15 +1,15 @@
 <script setup>
   import { useRouter, useRoute } from 'vue-router';
   import axios from 'axios';
-  import { useLoginStore } from '../../stores/LoginStore';
+  import { useUserInfoStore } from '../../stores/LoginStore';
   import { ref, onMounted, computed } from 'vue';
   import { storeToRefs } from 'pinia';
 
 
   // get login status
-  const loginStore = useLoginStore();
-  const { isLogin } = storeToRefs(loginStore);
-  const { checkLogin } = loginStore;
+  const userInfoStore = useUserInfoStore();
+  const { isLogin, isManager } = storeToRefs(userInfoStore);
+  const { updateUserInfo } = userInfoStore;
 
   const router = useRouter();
   const route = useRoute();
@@ -46,23 +46,15 @@
       alert('標題或內容不得為空');
     }
   }
-
-  const isManger = ref(false);
   
   // check login status and get boards and check if user is manager
   onMounted(async () => {
-    await checkLogin();
-
     if (!isLogin.value) {
       router.replace('/login');
     }
 
     const newBoards = await axios.get('/api/board/boards_info');
     boards.value = newBoards.data;
-
-    const manager_status = await axios.get('/api/auth/is_manager');
-    isManger.value = manager_status.data['is_manager']
-    console.log(manager_status.data);
   });
 
 </script>
@@ -84,10 +76,10 @@
   </select>
 
   <!-- manager options -->
-  <label v-if="isManger">管理員選項</label>
-  <div v-if="isManger" class="manager-options-container">
-    <p v-if="isManger" class="manager-options-p">置頂</p>
-    <input v-model="pinned" v-if="isManger" class="manager-options-checkbox" type="checkbox">
+  <label v-if="isManager">管理員選項</label>
+  <div v-if="isManager" class="manager-options-container">
+    <p v-if="isManager" class="manager-options-p">置頂</p>
+    <input v-model="pinned" v-if="isManager" class="manager-options-checkbox" type="checkbox">
   </div>
 
   <button

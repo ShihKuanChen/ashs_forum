@@ -1,6 +1,6 @@
 import os
 from flask import request, jsonify, session
-# from sqlalchemy import select
+from sqlalchemy import select
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from typing import Mapping, Any
@@ -8,6 +8,7 @@ from database import db
 from flask import Blueprint
 from .models import User
 from .utils import check_if_is_manager, check_if_is_logged_in
+from blueprints.utils import api_response
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -70,3 +71,32 @@ def is_manager():
     # print(f"is_manager: {_is_manager()}")
     return jsonify({"is_manager": check_if_is_manager()}), 200
 
+@auth_bp.route("/get_user_info", methods=['GET'])
+def get_user_info():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return api_response(
+            data={
+                "is_login": False
+            }
+        )
+    
+    user = db.session.execute(
+        select(User)
+        .where(User.user_id == user_id)
+    ).scalar()
+
+    if user is None:
+        return api_response(
+            success=False,
+            message="Can't find user",
+            code=400,
+        )
+    
+    return api_response(
+        data={
+            "is_login": True,
+            "is_banned": user.is_banned,
+            "is_manager": user.is_manager
+        }
+    )

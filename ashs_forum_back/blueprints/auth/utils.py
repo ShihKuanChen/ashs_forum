@@ -21,3 +21,7 @@ def check_if_is_logged_in():
         return True
     
     return False
+
+def check_if_is_banned():
+    # TODO: done this funcion
+    ...

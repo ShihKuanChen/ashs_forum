@@ -2,6 +2,8 @@
   import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router';
   import { computed, onMounted, ref } from 'vue';
   import { useInfiniteScroll } from '@vueuse/core';
+  import { useUserInfoStore } from '../../stores/LoginStore';
+  import { storeToRefs } from 'pinia';
   import axios from 'axios';
 
   const route = useRoute();
@@ -13,7 +15,8 @@
   const board_zh = ref('');
 
   // manager status
-  const isManager = ref(false);
+  const userInfoStore = useUserInfoStore();
+  const { isManager } = storeToRefs(userInfoStore);
 
   onMounted(async () => {
     // get board chinese title
@@ -27,14 +30,6 @@
     } catch (error) {
       console.log(error);
       router.replace('/');
-    }
-
-    // get manager status
-    try {
-      const manager_status = await axios.get('/api/auth/is_manager');
-      isManager.value = manager_status.data.is_manager;
-    } catch (error) {
-      console.log(error);
     }
   });
 

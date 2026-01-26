@@ -2,7 +2,7 @@
   import axios from 'axios';
   import { useRoute, useRouter } from 'vue-router';
   import { computed, ref, onMounted } from 'vue';
-  import { useLoginStore } from '../../stores/LoginStore';
+  import { useUserInfoStore } from '../../stores/LoginStore';
   import { storeToRefs } from 'pinia';
   
   // get title, content here
@@ -11,13 +11,9 @@
   const router = useRouter();
   const article_id = route.params.id;
 
-  // var article_title;
-  // var article_content;
-  // var article_upload_time;
-
-  const loginStore = useLoginStore();
-  const { isLogin } = storeToRefs(loginStore);
-  const { checkLogin } = loginStore;
+  const userInfoStore =  useUserInfoStore();
+  const { isLogin } = storeToRefs(userInfoStore);
+  const { updateUserInfo } = userInfoStore;
 
 
   // get article 
@@ -51,10 +47,6 @@
   }
 
   getComments();
-
-  onMounted(async () => {
-    await checkLogin();
-  });
 
   const isBtnDisabled = computed(() => {
     console.log(comment.value.trim() === '' || !isLogin.value);

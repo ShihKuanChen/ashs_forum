@@ -1,12 +1,12 @@
 <script setup>
   import {RouterView} from 'vue-router'
   import Navbar from './components/Navbar.vue'
-  import { useLoginStore } from '../stores/LoginStore';
+  import { useUserInfoStore } from '../stores/LoginStore';
 
-  const loginStore = useLoginStore();
-  const { checkLogin } = loginStore;
+  const userInfoStore = useUserInfoStore();
+  const { updateUserInfo } = userInfoStore;
 
-  checkLogin();
+  updateUserInfo();
 </script>
 
 <template>

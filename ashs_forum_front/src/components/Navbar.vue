@@ -1,19 +1,20 @@
 <script setup>
   import axios from 'axios';
   import { ref } from 'vue';
-  import { useLoginStore } from '../../stores/LoginStore';
+  // import { useLoginStore } from '../../stores/LoginStore';
+  import { useUserInfoStore } from '../../stores/LoginStore';
   import { storeToRefs } from 'pinia';
   import { useRouter } from 'vue-router';
 
   const router = useRouter();
   
-  const loginStore = useLoginStore();
-  const { isLogin } = storeToRefs(loginStore);
-  const { checkLogin } = loginStore;
+  const userInfoStore = useUserInfoStore();
+  const { isLogin } = storeToRefs(userInfoStore);
+  const { updateUserInfo } = userInfoStore;
 
   async function logout() {
     await axios.post('/api/auth/logout');
-    await checkLogin();
+    await updateUserInfo();
     
     router.replace('/');
   }
