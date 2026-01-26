@@ -8,3 +8,4 @@ class User(db.Model, Base):
     user_name: Mapped[str] = mapped_column(nullable=False)
     user_email: Mapped[str] = mapped_column(nullable=False)
     is_manager: Mapped[bool] = mapped_column(nullable=False, default=False)
+    is_banned: Mapped[bool] = mapped_column(nullable=False, default=False)
