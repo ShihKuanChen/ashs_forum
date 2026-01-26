@@ -57,6 +57,12 @@
     selectedBoard.value = boards.value[0].board_eng;
   });
 
+  // manager button colors
+  const pinnedBtnColor = computed(() => {
+    console.log(pinned.value)
+    return pinned.value ? "#345e2e" : "#252525"
+  });
+
 </script>
 
 <template>
@@ -78,8 +84,9 @@
   <!-- manager options -->
   <label v-if="isManager">管理員選項</label>
   <div v-if="isManager" class="manager-options-container">
-    <p v-if="isManager" class="manager-options-p">置頂</p>
-    <input v-model="pinned" v-if="isManager" class="manager-options-checkbox" type="checkbox">
+    <button class="manager-btn" @click="pinned=!pinned">置頂</button>
+    <!-- <p v-if="isManager" class="manager-options-p">置頂</p> -->
+    <!-- <input v-model="pinned" v-if="isManager" class="manager-options-checkbox" type="checkbox"> -->
   </div>
 
   <button
@@ -93,12 +100,6 @@
 </template>
 
 <style scoped>
-  /* .titleareaContainer {
-    display: flex;
-    justify-content: center;
-    
-  } */
-
   label {
     display: block;
     font-size: 0.8rem;
@@ -125,28 +126,28 @@
     outline: none;
   }
 
-  /* .btnDisabled {
-    color: rgb(80, 80, 80);
-    cursor: default;
+  .manager-btn {
+    cursor: pointer;
+
+    justify-self: start;
+    align-self: start;
+    background: v-bind(pinnedBtnColor);
+
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 5px 15px;
+    width: max-content;
+    height: max-content;
+
+    transition: background 0.2s ease;
   }
-
-  .btnEnabled {
-    cursor: pointer;
-  } */
-
-  /* button {
-    cursor: pointer;
-  } */
 
   select {
     cursor: pointer;
     appearance: none;
   }
-
-  /* .contentareaContainer {
-    display: flex;
-    justify-content: center;
-  } */
 
   .manager-options-container {
     display: grid;

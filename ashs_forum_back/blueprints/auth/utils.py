@@ -6,7 +6,7 @@ from .models import User
 def check_if_is_manager():
     user_id = session.get('user_id')
     if user_id is None:
-        return False
+        raise Exception("Didn't login")
 
     
     user = db.session.execute(select(User).where(User.user_id == user_id)).scalar()
@@ -14,7 +14,7 @@ def check_if_is_manager():
     if user is not None:
         return user.is_manager
     
-    return False
+    raise Exception("Can't find the user")
 
 def check_if_is_logged_in():
     if session.get('user_id'):
@@ -25,10 +25,11 @@ def check_if_is_logged_in():
 def check_if_is_banned():
     user_id = session.get('user_id')
     if user_id is None:
-        return True
+        raise Exception("Didn't login")
+        # return True
     
-    user = db.session.execute(select(User).where(User.user_id == user_id)).scalar()
-    if user is not None:
-        return user.is_banned
+    is_banned = db.session.execute(select(User.is_banned).where(User.user_id == user_id)).scalar()
+    if is_banned is not None:
+        return is_banned
     
-    return True
+    raise Exception("Can't find the user")

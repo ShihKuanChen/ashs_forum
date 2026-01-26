@@ -32,7 +32,8 @@ def get_articles_info():
             result.append({
                 "article_title": article.article_title,
                 "article_upload_time": upload_time,
-                "article_id": article.article_id
+                "article_id": article.article_id,
+                "writer_id": article.writer_id
             })
 
     stmt = select(Article)
@@ -55,7 +56,8 @@ def get_articles_info():
         result.append({
             "article_title": article.article_title,
             "article_upload_time": upload_time,
-            "article_id": article.article_id
+            "article_id": article.article_id,
+            "writer_id": article.writer_id
         })
     
     return jsonify(result)

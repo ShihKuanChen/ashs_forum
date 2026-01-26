@@ -110,7 +110,7 @@
     <div v-for="article in articles" id="articles" :key="article.article_id" @click="routeToArticle(article.article_id)">
       <article :id=article.article_id>
         <p class="article-title"> {{ article.article_title }} </p>
-        <button v-if="isManager" @click.stop="handler" @click="removeArticleAndComments(article.article_id)" class="delete-btn">刪除</button>
+        <button v-if="isManager" @click.stop="handler" @click="removeArticleAndComments(article.article_id)" class="manager-btn">刪除</button>
         <p class="article-time"> {{ article.article_upload_time }} </p>
       </article>
     </div>
@@ -153,7 +153,7 @@
   }
 
   .article-time {
-    grid-column: span 2;
+    grid-column: span 3;
     justify-self: end;
     align-self: end;
 
@@ -168,7 +168,7 @@
     overflow-y: auto;
   }
 
-  .delete-btn {
+  .manager-btn {
     cursor: pointer;
 
     justify-self: end;
@@ -178,14 +178,16 @@
     font-size: 0.6rem;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
-    width: 2.5rem;
-    height: 1.5rem;
+    margin-left: 0.5rem;
+    padding: 5px 10px;
+    width: max-content;
+    height: max-content;
   }
 
   article {
     display: grid;
     flex-direction: column;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto max-content max-content;
     /* justify-content: center; */
     border-bottom: 1px solid #3b3b3b;
     cursor: pointer;
