@@ -48,8 +48,8 @@ def remove_board_route():
         return jsonify({"error": "Board name cannot be empty"}), 400
     
     try:
-        remove_article_by_board(board_eng, commit=False)
         remove_comments_by_board(board_eng, commit=False)
+        remove_article_by_board(board_eng, commit=False)
         remove_board(board_eng, commit=False)
         db.session.commit()
         return jsonify({"message": "Board removed successfully"}), 200

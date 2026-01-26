@@ -19,6 +19,9 @@ def remove_comments_by_article_id(article_id: int, commit: bool=False):
         raise e
 
 def remove_comments_by_board(board_eng: str, commit: bool=False):
+    '''
+    the article of comment must exist
+    '''
     subquery = select(Article.article_id).where(Article.article_board == board_eng)
     stmt = delete(Comment).where(Comment.article_id.in_(subquery))
     db.session.execute(stmt)
