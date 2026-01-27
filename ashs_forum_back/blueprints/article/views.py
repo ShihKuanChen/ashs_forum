@@ -3,9 +3,9 @@ from sqlalchemy import select
 from database import db
 from .models import Article
 from datetime import datetime, timezone
-from blueprints.auth.utils import check_if_is_manager, check_if_is_logged_in
+from blueprints.auth.utils import check_if_is_manager, check_if_is_logged_in, check_if_is_banned
 from blueprints.board.server import update_board
-from blueprints.utils import get_tw_zone
+from blueprints.utils import get_tw_zone, api_response
 
 article_bp = Blueprint('article', __name__)
 
@@ -83,6 +83,9 @@ def create_article():
     if not check_if_is_logged_in():
         return jsonify({"error": "Unauthorized"}), 401
     
+    if check_if_is_banned():
+        return api_response(success=False, message="User is banned", code=401)
+
     current_time = datetime.now(timezone.utc)
     
     request_data = request.get_json()
@@ -112,11 +115,4 @@ def create_article():
     print("update board")
 
     return jsonify({"message": "Article created successfully"}), 201
-
-    # board_data = db.session.execute(
-    #     select(Board).where(Board.board_eng == article_board)
-    # ).scalar_one()
-
-    # board_data.board_n_articles += 1
-    # board_data.board_last_time = current_time.strftime("%Y-%m-%d")
     

@@ -153,7 +153,7 @@
   }
 
   .article-time {
-    grid-column: span 3;
+    grid-column: span 2;
     justify-self: end;
     align-self: end;
 
@@ -187,7 +187,7 @@
   article {
     display: grid;
     flex-direction: column;
-    grid-template-columns: auto max-content max-content;
+    grid-template-columns: auto max-content;
     /* justify-content: center; */
     border-bottom: 1px solid #3b3b3b;
     cursor: pointer;
