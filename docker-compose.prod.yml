@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build:
+      context: ./ashs_forum_front
+      target: production-stage
+  backend:
+    build:
+      context: ./ashs_forum_back
+      dockerfile: production-stage

@@ -1,0 +1,19 @@
+services:
+  frontend:
+    build:
+      context: ./ashs_forum_front
+      target: dev
+
+  backend:
+    build:
+      context: ./ashs_forum_back
+      dockerfile: dev
+  
+  redis-insight:
+    image: redis/redisinsight:latest
+    ports:
+      - "5540:5540"
+    volumes:
+      - ashs_forum_redisinsight_data:/data
+    depends_on:
+      - redis
