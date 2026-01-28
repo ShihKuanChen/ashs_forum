@@ -15,4 +15,11 @@ docker-compose up -f docker-compose.yml -f docker-compose.dev.yml
 docker-compose up -f docker-compose.yml -f docker-compose.prod.yml
 ```
 
-3. 首次使用請使用`docker-compose exec backend bash`並在其分別輸入`flask db migrate`及`flask db upgrade`來初始化資料庫
+3. 首次使用請初始化資料庫:
+
+```bash
+docker-compose exec backend bash
+
+flask db migrate
+flask db upgrade
+```
