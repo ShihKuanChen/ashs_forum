@@ -9,10 +9,10 @@
 
 ```bash
 # 開發階段
-docker-compose up -f docker-compose.yml -f docker-compose.dev.yml
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 
 
 # 生產階段
-docker-compose up -f docker-compose.yml -f docker-compose.prod.yml
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up 
 ```
 
 3. 首次使用請初始化資料庫:
