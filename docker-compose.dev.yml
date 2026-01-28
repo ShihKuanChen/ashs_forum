@@ -7,7 +7,7 @@ services:
   backend:
     build:
       context: ./ashs_forum_back
-      dockerfile: dev
+      target: dev
   
   redis-insight:
     image: redis/redisinsight:latest

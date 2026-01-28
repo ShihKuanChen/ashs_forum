@@ -6,4 +6,4 @@ services:
   backend:
     build:
       context: ./ashs_forum_back
-      dockerfile: production-stage
+      target: production-stage
