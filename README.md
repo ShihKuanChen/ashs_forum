@@ -1,4 +1,4 @@
-# Ashs Forum
+# ASHS Forum
 
 這是高師大附中匿名板網頁原始碼，包括前端及後端。
 
@@ -7,7 +7,6 @@
 * 安裝`Docker`
 * 向Google OAuth 2.0申請`Client ID`
 * 按照`.env.example`的格式輸入環境變數並且改名為`.env`
-
 
 ## 使用說明
 
