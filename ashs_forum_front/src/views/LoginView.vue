@@ -45,6 +45,8 @@
   }
 
   .google_login_container {
+    color: #3c4043;
+  
     display: flex;
     justify-content: center;
   }

@@ -9,7 +9,7 @@ COPY . .
 
 
 FROM base AS dev
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "80"]
 
 
 FROM base AS build-stage

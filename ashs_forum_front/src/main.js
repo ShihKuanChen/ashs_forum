@@ -20,6 +20,7 @@ app.use(vue3GoogleLogin, {
   buttonConfig: {
     // locale: "zh_TW",
     shape: 'pill',
+    // theme: 'filled_black',
     // width: "300"
   }
 })
