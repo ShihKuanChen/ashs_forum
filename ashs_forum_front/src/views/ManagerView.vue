@@ -2,22 +2,20 @@
   import { ref, onMounted } from 'vue';
   import axios from 'axios';
   import { useRouter } from 'vue-router';
+  import { useUserInfoStore } from '../../stores/LoginStore';
+  import { storeToRefs } from 'pinia';
 
   const router = useRouter();
 
   // const isManager = ref(false);
 
-  const checkManager = async () => {
-    const response = await axios.get('/api/auth/is_manager');
-    return response.data.is_manager;
-    // console.log(response.data);
-  }
+  // check if is manager
+  const userInfoStore = useUserInfoStore();
+  const { isManager } = storeToRefs(userInfoStore);
 
-  onMounted(async () => {
-    if (!await checkManager()) {
-      router.replace('/');
-    }
-  });
+  if (!isManager.value) {
+    router.replace('/');
+  }
 
   const inputValues = ref({
     create_board_eng: '',
