@@ -8,7 +8,7 @@
 * 向Google OAuth 2.0申請`Client ID`
 * 按照`.env.example`的格式輸入環境變數並且改名為`.env`
 
-## 使用說明
+## 快速啟動
 
 1. 啟動容器:
 
@@ -29,3 +29,6 @@ flask db migrate
 flask db upgrade
 "
 ```
+
+## 技術
+本專案使用Vue.js作為前端框架，後端使用Python Flask，並使用Flask Migrate管理資料庫，資料庫使用PostgreSQL儲存網站資料並且使用Redis管理登入狀態。
