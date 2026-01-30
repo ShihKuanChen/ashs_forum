@@ -32,4 +32,4 @@ flask db upgrade
 
 ## 技術
 
-本專案使用Vue.js作為前端框架，後端使用Python Flask，並使用Flask Migrate管理資料庫，資料庫使用PostgreSQL儲存網站資料並且使用Redis管理登入狀態。
+本專案使用Vue.js作為前端框架，後端使用Python Flask，使用Nginx作為前端伺服器以及後端反向代理，並使用Flask Migrate管理資料庫，資料庫使用PostgreSQL儲存網站資料並且使用Redis管理登入狀態。
