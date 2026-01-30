@@ -23,11 +23,7 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 2. 首次使用請在資料庫建立新的資料表:
 
 ```bash
-docker-compose exec backend bash -c "
-flask db init
-flask db migrate
-flask db upgrade
-"
+docker-compose exec backend bash -c "flask db upgrade"
 ```
 
 ## 技術

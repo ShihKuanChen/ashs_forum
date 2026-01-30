@@ -14,9 +14,6 @@
 .env.development
 .env.production
 
-# Flask Migrate
-ashs_forum_back/migrations
-
 # --- frontend ---
 # Logs
 ashs_forum_front/logs
