@@ -23,7 +23,11 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 2. 首次使用請在資料庫建立新的資料表:
 
 ```bash
+# 先將.env的SUPER_MODE=true
+
 docker-compose exec backend bash -c "flask db upgrade"
+
+# 將.env的SUPER_MODE=false並重啟容器
 ```
 
 ## 技術
