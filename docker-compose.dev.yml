@@ -17,3 +17,7 @@ services:
       - ashs_forum_redisinsight_data:/data
     depends_on:
       - redis
+
+  db:
+    ports:
+      - 5432:5432
