@@ -21,3 +21,6 @@ services:
   db:
     ports:
       - 5432:5432
+
+volumes:
+  ashs_forum_redisinsight_data:

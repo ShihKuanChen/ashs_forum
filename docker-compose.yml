@@ -46,5 +46,4 @@ services:
 
 volumes:
   ashs_forum_redis_data:
-  ashs_forum_redisinsight_data:
   ashs_forum_db_data:
