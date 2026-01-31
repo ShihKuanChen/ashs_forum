@@ -7,5 +7,3 @@ services:
     build:
       context: ./ashs_forum_back
       target: production-stage
-      args:
-        WORKER: ${WORKER}
