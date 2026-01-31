@@ -8,4 +8,4 @@ services:
       context: ./ashs_forum_back
       target: production-stage
       args:
-        WORKER: 4
+        WORKER: ${WORKER}
