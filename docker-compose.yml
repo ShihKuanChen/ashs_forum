@@ -2,8 +2,6 @@ services:
   backend:
     build:
       context: ./ashs_forum_back
-      args:
-        WORKER: 4
     restart: always
     volumes:
       - ./ashs_forum_back:/app
