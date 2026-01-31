@@ -4,7 +4,8 @@
 
 ## 先決條件
 
-* 安裝`Docker`
+* `Docker` >= 29.1.3
+* `Docker Compose` >= 5.0.0
 * 向Google OAuth 2.0申請`Client ID`
 * 按照`.env.example`的格式輸入環境變數並且改名為`.env`
 
@@ -22,13 +23,14 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 
 2. 首次使用請在資料庫建立新的資料表:
 
+先將.env的SUPER_MODE=true
+接著執行:
+
 ```bash
-# 先將.env的SUPER_MODE=true
-
 docker-compose exec backend bash -c "flask db upgrade"
-
-# 將.env的SUPER_MODE=false並重啟容器
 ```
+
+再將.env的SUPER_MODE=false並重啟容器
 
 ## 技術
 
