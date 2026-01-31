@@ -8,6 +8,9 @@ services:
     build:
       context: ./ashs_forum_back
       target: dev
+    
+    volumes:
+      - ./ashs_forum_back:/app
   
   redis-insight:
     image: redis/redisinsight:latest

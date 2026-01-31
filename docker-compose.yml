@@ -3,8 +3,6 @@ services:
     build: ./ashs_forum_back
     image: ghcr.io/shihkuanchen/ashs_forum-backend:latest
     restart: always
-    volumes:
-      - ./ashs_forum_back:/app
     env_file:
       - ./.env
     environment:
