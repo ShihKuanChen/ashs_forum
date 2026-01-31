@@ -7,6 +7,7 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+COPY init-db.sh /docker-entrypoint-initdb.d/init-db.sh
 
 FROM base AS dev
 ENV FLASK_APP=backend.py

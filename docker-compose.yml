@@ -1,7 +1,7 @@
 services:
   backend:
-    build:
-      context: ./ashs_forum_back
+    build: ./ashs_forum_back
+    image: ghcr.io/shihkuanchen/ashs_forum-backend:latest
     restart: always
     volumes:
       - ./ashs_forum_back:/app
@@ -16,6 +16,7 @@ services:
     
   frontend:
     build: ./ashs_forum_front
+    image: ghcr.io/shihkuanchen/ashs_forum-frontend:latest
     restart: always
     ports:
       - "80:80"
