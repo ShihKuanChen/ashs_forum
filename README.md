@@ -11,8 +11,6 @@
 
 ## 快速啟動
 
-1. 啟動容器:
-
 ```bash
 # 開發階段
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 
@@ -20,17 +18,6 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 # 生產階段
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up 
 ```
-
-2. 首次使用請在資料庫建立新的資料表:
-
-先將.env的SUPER_MODE=true
-接著執行:
-
-```bash
-docker-compose exec backend bash -c "flask db upgrade"
-```
-
-再將.env的SUPER_MODE=false並重啟容器
 
 ## 技術
 
