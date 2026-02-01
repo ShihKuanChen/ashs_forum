@@ -39,10 +39,9 @@ services:
     env_file:
       ./.env
     volumes:
-      - ashs_forum_db_data:/var/lib/postgresql
+      - ./ashs_forum_db_data:/var/lib/postgresql
       - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
 
 
 volumes:
   ashs_forum_redis_data:
-  ashs_forum_db_data:

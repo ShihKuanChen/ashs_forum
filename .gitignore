@@ -54,4 +54,7 @@ ashs_forum_back/ashs_forum_back_env
 # sqlite database
 ashs_forum_back/instance
 
+# postgresql data
+ashs_forum_db_data
+
 gittoken
