@@ -15,11 +15,11 @@ from blueprints.manage.views import manage_bp
 app = Flask(__name__)
 
 # set sql
-if os.getenv('SUPER_MODE') == 'true':
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SUPER_DATABASE_URI')
+# if os.getenv('SUPER_MODE') == 'true':
+#     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SUPER_DATABASE_URI')
 
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
+# else:
+#     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI') or os.getenv('DATABASE_URI')
 

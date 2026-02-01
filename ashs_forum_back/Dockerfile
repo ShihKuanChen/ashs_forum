@@ -7,13 +7,13 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-COPY init-db.sh /docker-entrypoint-initdb.d/init-db.sh
 
 ENTRYPOINT [ "entrypoint.sh" ]
 
 FROM base AS dev
 ENV FLASK_APP=backend.py
 ENV FLASK_DEBUG=1
+EXPOSE 5000
 CMD ["flask", "run", "--host=0.0.0.0"]
 
 FROM base AS production-stage
