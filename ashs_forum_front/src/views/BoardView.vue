@@ -41,7 +41,7 @@
   useInfiniteScroll(
     scrollContainer, 
     async () => {
-      console.log(`loading`);
+      // console.log(`loading`);
       // pause();
       // get article titles and upload time
       await axios.get(`/api/article/articles_info`, {
@@ -50,15 +50,15 @@
           board: board, 
           last_id: lastArticleId.value // must change
         }}).then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           if (response.data.length === 0) {
-            console.log('no more articles');
+            // console.log('no more articles');
             hasMore.value = false;
             
           } else {
             articles.value.push(...response.data);
             lastArticleId.value = articles.value[articles.value.length - 1].article_id;
-            console.log(lastArticleId.value);
+            // console.log(lastArticleId.value);
           }
         }).catch(error => {
           console.log(error);

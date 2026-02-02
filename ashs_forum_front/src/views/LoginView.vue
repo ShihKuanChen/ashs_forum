@@ -7,12 +7,12 @@
   const userInfoStore = useUserInfoStore();
   const { updateUserInfo } = userInfoStore;
 
-  console.log("Client id:")
-  console.log(import.meta.env.VITE_GOOGLE_CLIENT_ID)
+  // console.log("Client id:")
+  // console.log(import.meta.env.VITE_GOOGLE_CLIENT_ID)
 
 
   const callback = async (response) => {
-    console.log(response);
+    // console.log(response);
 
     // call login api
     await axios.post('/api/auth/login', {

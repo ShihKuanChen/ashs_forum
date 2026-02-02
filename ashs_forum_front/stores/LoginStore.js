@@ -15,7 +15,7 @@ export const useUserInfoStore = defineStore('userInfo', () => {
             const userInfo = response.data.data;
             isLogin.value = userInfo.is_login;
 
-            console.log(userInfo);
+            // console.log(userInfo);
 
             if (isLogin.value === true) {
                 isBanned.value = userInfo.is_banned;

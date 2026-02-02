@@ -29,7 +29,7 @@ const router = createRouter({
     path: '/logout',
     name: 'logout',
     beforeEnter: (to, from) => {
-      console.log('logout');
+      // console.log('logout');
       const userInfoStore = useUserInfoStore();
       const { updateUserInfo } = userInfoStore;
 

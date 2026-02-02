@@ -26,7 +26,7 @@
     article_title.value = response.data.article_title;
     article_content.value = response.data.article_content;
     article_upload_time.value = response.data.article_upload_time;
-    console.log(response.data);
+    // console.log(response.data);
   })
   .catch(error => {
       router.replace('/');
@@ -39,7 +39,7 @@
     axios.get(`/api/comment/comments/${article_id}`)
     .then(response => {
       comments.value = response.data;
-      console.log(response.data);
+      // console.log(response.data);
     })
     .catch(error => {
       console.log(error);
@@ -49,7 +49,7 @@
   getComments();
 
   const isBtnDisabled = computed(() => {
-    console.log(comment.value.trim() === '' || !isLogin.value);
+    // console.log(comment.value.trim() === '' || !isLogin.value);
     return (comment.value.trim() === '' || !isLogin.value);
   })
 

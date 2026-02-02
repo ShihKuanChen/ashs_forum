@@ -29,7 +29,7 @@
 
   const submitArticle = async () => {
     if (!isTitleOrContentEmpty.value) {
-      console.log(`is pinned: ${pinned.value}`);
+      // console.log(`is pinned: ${pinned.value}`);
       axios.post('/api/article/write', {
         article_board: selectedBoard.value,
         article_title: articleTitle.value,
@@ -59,7 +59,7 @@
 
   // manager button colors
   const pinnedBtnColor = computed(() => {
-    console.log(pinned.value)
+    // console.log(pinned.value)
     return pinned.value ? "#345e2e" : "#252525"
   });
 
