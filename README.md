@@ -11,6 +11,9 @@
 
 ## 快速啟動
 
+下載 `docker-compose.yml` 及 `init-db.sh` 並根據需要下載 `docker-compose.dev.yml` 或 `docker-compose.prod.yml`
+接著執行: 
+
 ```bash
 # 開發階段
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up 
