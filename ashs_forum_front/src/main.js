@@ -15,7 +15,7 @@ app.use(pinia)
 app.use(vue3GoogleLogin, {
   clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
   idConfiguration: {
-    hosted_domain: 'stu.nknush.kh.edu.tw'
+    hosted_domain: import.meta.env.VITE_HD,
   },
   buttonConfig: {
     // locale: "zh_TW",

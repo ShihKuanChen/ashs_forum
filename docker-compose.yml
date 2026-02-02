@@ -13,7 +13,11 @@ services:
       - db
     
   frontend:
-    build: ./ashs_forum_front
+    build:
+      context: ./ashs_forum_front
+      args:
+        - VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID}
+        - VITE_HD=${VITE_HD}
     image: ghcr.io/shihkuanchen/ashs_forum-frontend:latest
     restart: always
     ports:

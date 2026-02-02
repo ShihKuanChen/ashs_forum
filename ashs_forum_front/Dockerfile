@@ -13,6 +13,11 @@ CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "80"]
 
 
 FROM base AS build-stage
+ARG VITE_GOOGLE_CLIENT_ID
+ARG VITE_HD
+ENV VITE_GOOGLE_CLIENT_ID=$VITE_GOOGLE_CLIENT_ID
+ENV VITE_HD=$VITE_HD
+
 RUN npm run build
 
 

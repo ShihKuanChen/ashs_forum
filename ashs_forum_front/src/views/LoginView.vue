@@ -7,6 +7,9 @@
   const userInfoStore = useUserInfoStore();
   const { updateUserInfo } = userInfoStore;
 
+  console.log("Client id:")
+  console.log(import.meta.env.VITE_GOOGLE_CLIENT_ID)
+
 
   const callback = async (response) => {
     console.log(response);
