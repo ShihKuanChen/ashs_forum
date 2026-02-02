@@ -34,6 +34,9 @@ jobs:
         context: ashs_forum_back
         push: true
         tags: ghcr.io/shihkuanchen/ashs_forum-backend:latest
+        build-args: |
+          VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+          VITE_HD=${{ secrets.VITE_HD }}
 
     - name: Build and push Frontend Docker images
       uses: docker/build-push-action@v6.18.0
