@@ -4,6 +4,10 @@ services:
       context: ./ashs_forum_front
       target: dev
 
+    volumes:
+      - ./ashs_forum_front:/app
+      - /app/node_modules
+
   backend:
     build:
       context: ./ashs_forum_back

@@ -8,7 +8,24 @@
   <p>本網頁非學校之官方溝通管道，有關於學校的任何需求請至學校官方溝通管道聯絡。</p>
 
   <h1>聯絡資訊</h1>
-  <p>有關於網頁的任何需要請聯繫: admin@ashsforum.tw</p>
+  <p class="contact-text"></p>
+  <a>Email: admin@ashsforum.tw</a>
+  <br/>
+  
+  <a href="https://github.com/ShihKuanChen/ashs_forum">GitHub: Link</a>
 </template>
 
-<style></style>
+<style scoped>
+  .contact-text {
+    display: inline;
+    white-space: pre;
+    color: rgb(236, 236, 236);
+  }
+
+  a {
+    font-weight: 700;
+    display: inline;
+    text-decoration: none;
+    padding-left: 0;
+  }
+</style>
